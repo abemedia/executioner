@@ -1,0 +1,44 @@
+language: go
+
+#
+
+go:
+- 1.6
+
+#
+
+install:
+- go get
+
+#
+
+script:
+- go test
+- go build
+
+#
+
+notifications:
+  email:
+    recipients:
+    - adam@abemedia.co.uk
+
+#
+
+before_deploy:
+- ./scripts/release.sh
+
+#
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: qD1DB9MMV6qqeKGPX6oe+SicEqDU6AymRzvLOujLWrdONypi4qGuKHcI0fuHesfgnfLvSg5UxrD9JrRijiwCYevy4NBHxVnoyK8BWLUy9Fg2ZUD2X1Xx+l7ckVJZ52vyURZFmzeMy3NLRcNOIHl/l/lrOwfyuwcAc8BHtdRAZuQAWuxcpESS+M6RVfhxx7+0HTgwKbwnOKXqcHgu+d2ZLtxCgH6QWIGm8tDiPY486lRwRPwYjL1EoDX7geWQjiW1VhbDwE8W0iQHHtL4EGCUqoQcvS/WrLh+EavVJFWYcoLDDa6arpE4EqvFaWG/obnXBq+YAK31C6Mj7dKiZbbhfggOuMO2iC0wneTn2S0FT/omSA1z2gxTrB2lrfFOsEjzqhTt+VlMkqOaebYPNTWMBo0FNESiT+d5UZE6ar8i39IYohsaXFhrbyQz7gIhGIfurxZZd6zTOTq2V1y7wfBRLe+c+GQz+PDfA08c/RN5SiTkEKOz4rY7e2vooJse6TEZh3Vb9qH1r6libwGUiPSeObLIkHze+0JCQdDy4jfe+/NG1/76vf03wm/cdqqzzFmQZeABKIsIZUg7PVDhomDcE1/s18apt1xLYUznU+OcpDlraA4vhPJJU57gqK78WHNxsjkgoWeK1JwCL4JgeLrVN2bPYC5KSB+wJ+iNUt+NmXE=
+  file:
+  - "release/executioner-linux-386-$TRAVIS_TAG.tar.gz"
+  - "release/executioner-linux-amd64-$TRAVIS_TAG.tar.gz"
+  - "release/executioner-windows-32bit-$TRAVIS_TAG.zip"
+  - "release/executioner-windows-64bit-$TRAVIS_TAG.zip"
+  on:
+    tags: true

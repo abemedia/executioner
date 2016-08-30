@@ -1,0 +1,6 @@
+host: 0.0.0.0
+port: 8080
+secret: YOUR_API_KEY
+log_path: ./errors.log
+endpoints:
+  test: touch test.md
